@@ -1,0 +1,104 @@
+@import "tailwindcss";
+:root {
+  --site-bg: #222222;
+  --site-text: #e5e7eb;
+  --site-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --badge-bg: #222222;
+}
+
+.theme-light {
+  --site-bg: #f8fafc;
+  --site-text: #000000;
+  --site-font: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --badge-bg: #585858; /* شارات أغمق في الثيم الفاتح */
+}
+
+/* اجعل فئات النص الرمادي في Tailwind تظهر بلون النص في الثيم الفاتح */
+.theme-light .text-gray-300,
+.theme-light .text-gray-200,
+.theme-light .text-gray-400 {
+  color: var(--site-text) !important;
+}
+
+.theme-dark {
+  --site-bg: #222222;
+  --site-text: #e5e7eb;
+  --site-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --badge-bg: #222222;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--site-bg);
+  color: var(--site-text);
+  font-family: var(--site-font);
+  transition: background-color 200ms ease, color 200ms ease, font-family 200ms ease;
+}
+
+/* شارة تتغير حسب الثيم */
+.badge-bg {
+  background-color: var(--badge-bg);
+  color: inherit;
+}
+
+/* Nav button defaults and active states */
+.nav-btn {
+  color: #d1d5db; /* tailwind gray-300 fallback */
+  background: transparent;
+}
+.nav-btn.active {
+  background: #ff4d4f; /* red */
+  color: #000; /* active text black */
+}
+
+/* Light theme: subtle red background for active nav button */
+.theme-light .nav-btn {
+  color: rgba(0,0,0,0.7);
+}
+.theme-light .nav-btn.active {
+  background: rgba(255,77,79,0.12);
+  color: var(--site-text);
+}
+
+/* تخصيص سريع لأزرار/تأثيرات عامة (اختياري) */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* تحسين المظهر على أجهزة صغيرة */
+@media (max-width: 640px) {
+  .pt-\[100px\] { padding-top: 60px; }
+}
+
+/* Section-specific backgrounds */
+html.in-skills body {
+  background: linear-gradient(180deg, #1b2230 0%, #0f1724 100%);
+}
+.theme-light.in-skills body {
+  background: linear-gradient(180deg, #f3f6fa 0%, #e6eef6 100%);
+}
+
+html.in-contact body {
+  background: linear-gradient(180deg, #2b213a 0%, #0f0711 100%);
+}
+.theme-light.in-contact body {
+  background: linear-gradient(180deg, #fff7fb 0%, #f3eef6 100%);
+}
+
+/* Smooth transition for section background changes */
+body {
+  transition: background 400ms ease, background-color 400ms ease;
+}
+
+/* Make anchor targets offset for fixed nav: adjust based on nav height */
+#about, #projects, #skills, #contact {
+  scroll-margin-top: 90px;
+}
+
+@media (max-width: 640px) {
+  #about, #projects, #skills, #contact { scroll-margin-top: 70px; }
+}
